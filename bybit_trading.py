@@ -8,8 +8,8 @@ import numpy as np
 
 # 로그인
 # -------------------------------------------------
-api_key = "dzfMzFsZPaJ6pDQ313"
-api_secret = "DgthJ9VAvfDOCkuZcPx75M6nDeTOeqClTECn"
+api_key = ""
+api_secret = ""
 
 session = usdt_perpetual.HTTP(
     endpoint="https://api.bybit.com", 
