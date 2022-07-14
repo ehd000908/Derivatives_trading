@@ -519,7 +519,7 @@ while True:
 
                             fb = balances()['available_balance']
 
-                            qty = round(fb * leverage / get_current_price(btc), 3)
+                            qty = round(fb * leverage *0.97 / get_current_price(btc), 3)
 
                             # 롱 포지션 주문
                             open_long(fb, get_current_price(btc))
@@ -606,7 +606,7 @@ while True:
 
                             fb = balances()['available_balance']
 
-                            qty = round(fb * leverage / get_current_price(btc), 3)
+                            qty = round(fb * leverage *0.97 / get_current_price(btc), 3)
 
                             # 숏 포지션 주문
                             open_short(fb, get_current_price(btc))
@@ -652,35 +652,35 @@ while True:
                 close_short(qty, get_current_price(btc))
 
 
-            # 추가 매수 금액 부족 - Stop Loss 주문
-            if balances()['available_balance'] < 3:
+            # # 추가 매수 금액 부족 - Stop Loss 주문
+            # if balances()['available_balance'] < 3:
                 
-                if long_position()['position_margin'] > 0 and long_position()['stop_loss'] == 0:
+            #     if long_position()['position_margin'] > 0 and long_position()['stop_loss'] == 0:
 
-                    avg_price = long_position()['entry_price']
+            #         avg_price = long_position()['entry_price']
 
-                    sl_price = avg_price - avg_price * stop_loss_percent / 100 / leverage
+            #         sl_price = avg_price - avg_price * stop_loss_percent / 100 / leverage
 
-                    session.set_trading_stop(
-                        symbol=btc,
-                        side="Buy",
-                        stop_loss=sl_price
-                    )
+            #         session.set_trading_stop(
+            #             symbol=btc,
+            #             side="Buy",
+            #             stop_loss=sl_price
+            #         )
                 
-                if short_position()['position_margin'] > 0 and short_position()['stop_loss'] == 0:
+            #     if short_position()['position_margin'] > 0 and short_position()['stop_loss'] == 0:
 
-                    avg_price = short_position()['entry_price']
-                    print(avg_price)
+            #         avg_price = short_position()['entry_price']
+            #         print(avg_price)
 
-                    sl_price = avg_price + avg_price * stop_loss_percent / 100 / leverage
-                    print(sl_price)
-                    session.set_trading_stop(
-                        symbol=btc,
-                        side="Sell",
-                        stop_loss=sl_price
-                    )
+            #         sl_price = avg_price + avg_price * stop_loss_percent / 100 / leverage
+            #         print(sl_price)
+            #         session.set_trading_stop(
+            #             symbol=btc,
+            #             side="Sell",
+            #             stop_loss=sl_price
+            #         )
 
-        time.sleep(1.4)
+        time.sleep(1.2)
 
     except Exception as e:
         print(e)
